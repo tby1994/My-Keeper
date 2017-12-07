@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        updateEntries();
     }
 
     public void onAddEntry(View view) {
@@ -51,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateEntries() {
-        Bundle bundle = getIntent().getExtras();
-        String description = bundle.getString("description");
-        int amount = Integer.parseInt(bundle.getString("amount"));
-        Command command = new Command(entries);
-        entries = command.excute(description, amount);
+        if (getIntent().hasExtra("description") && getIntent().hasExtra("amount")) {
+            Bundle bundle = getIntent().getExtras();
+            String description = bundle.getString("description");
+            int amount = Integer.parseInt(bundle.getString("amount"));
+            Command command = new Command(entries);
+            //entries = command.excute(description, amount);
+        }
     }
 }
