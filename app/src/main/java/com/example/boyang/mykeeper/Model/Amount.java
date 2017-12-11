@@ -10,17 +10,17 @@ import com.example.boyang.mykeeper.Exceptions.IllegalValueException;
  * Represent the amount of the entry
  */
 public class Amount {
-    private int amount;
+    private float amount;
 
-    public Amount(int amount) {
+    public Amount(float amount) {
         this.amount = amount;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

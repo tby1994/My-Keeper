@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAddEntry(View view) {
         Intent intent = new Intent(MainActivity.this, ActivityAdd.class);
-        //intent.putExtra("entries", entries);
         startActivity(intent);
     }
 
@@ -46,21 +45,19 @@ public class MainActivity extends AppCompatActivity {
         entryArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, entries);
         lvEntries.setAdapter(entryArrayAdapter);
-        entries = storageManager.readSave(entries);
-        entries.add(new Entry("abc 12"));
-        entries.add(new Entry("abc", 12));
-        entryArrayAdapter.notifyDataSetChanged();
+        storageManager.readSave(entries);
     }
 
     private void updateEntries() {
         if (getIntent().hasExtra("description") && getIntent().hasExtra("amount")) {
             Bundle bundle = getIntent().getExtras();
             String description = bundle.getString("description");
-            int amount = Integer.parseInt(bundle.getString("amount"));
-            Command command = new Command(entries);
-            entries = command.excute(description, amount);
-            entries.add(new Entry("acd, 12"));
-            entryArrayAdapter.notifyDataSetChanged();
+            float amount = Float.parseFloat(bundle.getString("amount"));
+            Command command = new Command();
+            command.excute(description, amount, entries);
+            //entryArrayAdapter.clear();
+            entryArrayAdapter.addAll(entries);
+            storageManager.writeSave(entries);
         }
     }
 }

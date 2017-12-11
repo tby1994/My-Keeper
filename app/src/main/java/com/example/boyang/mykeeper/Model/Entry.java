@@ -10,13 +10,14 @@ public class Entry {
     private Amount amount;
     private Description description;
 
-    public Entry(String input) {
-        String[] trimmedInput = input.trim().split(" ");
-        this.description = new Description(trimmedInput[0]);
-        this.amount = new Amount(Integer.parseInt(trimmedInput[1]));
+    public Entry(String description, String amount) {
+        String[] trimmedDescription = description.split(" ");
+        String[] trimmedAmount = amount.split(" ");
+        this.description = new Description(trimmedDescription[1].trim());
+        this.amount = new Amount(Float.parseFloat(trimmedAmount[1].trim()));
     }
 
-    public Entry(String description, int amount) {
+    public Entry(String description, float amount) {
         this.description = new Description(description);
         this.amount = new Amount(amount);
     }
@@ -26,7 +27,7 @@ public class Entry {
         return description.getDescription();
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount.getAmount();
     }
 
@@ -35,7 +36,7 @@ public class Entry {
         description.setDescription(newDescription);
     }
 
-    public void setEntry(int newAmount) {
+    public void setEntry(float newAmount) {
         amount.setAmount(newAmount);
     }
 

@@ -1,6 +1,7 @@
 package com.example.boyang.mykeeper.Logic;
 
 import com.example.boyang.mykeeper.Model.Entry;
+import com.example.boyang.mykeeper.Storage.StorageManager;
 
 import java.util.ArrayList;
 
@@ -9,12 +10,8 @@ import java.util.ArrayList;
  */
 
 public class Command {
-    ArrayList<Entry> entries;
 
-    public Command (ArrayList<Entry> entries) {
-        this.entries = entries;
-    }
-
+/*
     public ArrayList<Entry> excute(String description, int amount) {
         if (description.equals(null) || amount == 0) {
             return entries;
@@ -22,8 +19,17 @@ public class Command {
         entries.add(new Entry(description, amount));
         return entries;
     }
+*/
+    public void excute(String description, float amount, ArrayList<Entry> entries) {
+        if (description.equals(null) || amount == 0) {
+            //return entries;
+            return;
+        }
+        entries.add(new Entry(description, amount));
+        //return entries;
+    }
 
-    public ArrayList<Entry> excute(int index) {
+    public ArrayList<Entry> excute(int index , ArrayList<Entry> entries) {
         entries.remove(index);
         return entries;
     }

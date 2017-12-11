@@ -21,20 +21,29 @@ public class StorageManager {
         saveFile = new File(filesDir, "accountsBook.txt");
     }
 
-    public ArrayList<Entry> readSave(ArrayList<Entry> entries) {
+    public void readSave(ArrayList<Entry> entries) {
+        int count = 0;
+        String description = "";
+        String amount;
         try {
             for (String entry : FileUtils.readLines(saveFile)) {
-                entries.add(new Entry(entry));
+                if (count % 2 == 0) {
+                    description = entry;
+                } else {
+                    amount = entry;
+                    entries.add(new Entry(description, amount));
+                }
+                count++;
             }
         } catch (IOException e) {
             entries = new ArrayList<>();
         }
-        return entries;
     }
 
     public void writeSave(ArrayList<Entry> entries) {
         try {
             FileUtils.writeLines(saveFile, entries);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
